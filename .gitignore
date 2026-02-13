@@ -1,0 +1,50 @@
+# Large Data Files
+data/
+*.csv
+*.txt
+*.annot
+
+# Machine Learning Models (large pickle files)
+backend/models/*.pkl
+backend/models/biomarkers/
+
+# Database Files
+*.db
+instance/
+backend/instance/
+
+# Output Files
+outputs/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebooks Checkpoints
+.ipynb_checkpoints/
+
+# IDE Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Keep only gene JSON files in models
+!backend/models/*.json

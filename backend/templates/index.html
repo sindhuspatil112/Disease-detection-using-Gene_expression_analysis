@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">Upload Gene Expression Data</h2>
+            
+            <div class="alert alert-info">
+                <h5>📊 Gene Expression Analysis</h5>
+                <p>Upload your gene expression data file to get cancer risk predictions for breast, lung, and ovarian cancers.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">Select Gene Expression File</label>
+                            <input type="file" class="form-control" name="file" accept=".csv,.txt,.tsv" required>
+                            <div class="form-text">Supported formats: CSV, TXT, TSV</div>
+                        </div>
+                        
+                        {% if current_user.role == 'researcher' %}
+                        <div class="mb-3">
+                            <label class="form-label">Analysis Options</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="detailed_analysis" id="detailed">
+                                <label class="form-check-label" for="detailed">
+                                    Include detailed biomarker analysis
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cross_validation" id="crossval">
+                                <label class="form-check-label" for="crossval">
+                                    Perform cross-validation
+                                </label>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <button type="submit" class="btn btn-primary btn-lg">🔬 Predict Cancer Risk</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6>File Requirements</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled small">
+                        <li>✓ Gene expression matrix</li>
+                        <li>✓ Probe IDs or Gene symbols</li>
+                        <li>✓ Normalized expression values</li>
+                        <li>✓ Maximum file size: 50MB</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6>Supported Cancer Types</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-column gap-2">
+                        <span class="badge bg-primary">🎗️ Breast Cancer</span>
+                        <span class="badge bg-success">🫁 Lung Cancer</span>
+                        <span class="badge bg-warning">🩺 Ovarian Cancer</span>
+                    </div>
+                </div>
+            </div>
+            
+            {% if current_user.role in ['doctor', 'researcher'] %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6>Professional Features</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small">Advanced analysis options available for medical professionals and researchers.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

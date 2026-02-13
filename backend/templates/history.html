@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h3>History</h3>
+  
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title">Risk Results Variation</h6>
+      <canvas id="resultsChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+  
+  {% for h in items %}
+    <div class="card p-2 my-2">
+      <b>{{ h.filename }}</b> - {{ h.timestamp }}
+      <div>Result: {{ h.results }}</div>
+    </div>
+  {% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const resultsData = {
+    labels: [{% for h in items %}'{{ h.timestamp.strftime("%m/%d") }}'{% if not loop.last %},{% endif %}{% endfor %}],
+    datasets: [{
+        label: 'Breast Cancer Risk',
+        data: [{% for h in items %}{{ h.results.get('breast', 0) if h.results and h.results is mapping else 0 }}{% if not loop.last %},{% endif %}{% endfor %}],
+        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Lung Cancer Risk',
+        data: [{% for h in items %}{{ h.results.get('lung', 0) if h.results and h.results is mapping else 0 }}{% if not loop.last %},{% endif %}{% endfor %}],
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Ovarian Cancer Risk',
+        data: [{% for h in items %}{{ h.results.get('ovarian', 0) if h.results and h.results is mapping else 0 }}{% if not loop.last %},{% endif %}{% endfor %}],
+        backgroundColor: 'rgba(255, 205, 86, 0.6)',
+        borderColor: 'rgba(255, 205, 86, 1)',
+        borderWidth: 1
+    }]
+};
+
+new Chart(document.getElementById('resultsChart'), {
+    type: 'bar',
+    data: resultsData,
+    options: {
+        responsive: true,
+        plugins: { legend: { display: true, position: 'top' } },
+        scales: { y: { beginAtZero: true, max: 100 } }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🤝 Collaboration Hub</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            {% if current_user.role == 'researcher' %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>📤 Share Research with Doctors</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/share-report">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Select Doctor</label>
+                                <select class="form-select" name="doctor_id" required>
+                                    <option value="">Choose a doctor...</option>
+                                    {% for doctor in doctors %}
+                                    <option value="{{ doctor.id }}">Dr. {{ doctor.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Your Research Report</label>
+                                <select class="form-select" name="prediction_id" required>
+                                    <option value="">Select report...</option>
+                                    {% for prediction in user_predictions %}
+                                    <option value="{{ prediction.id }}">
+                                        {{ prediction.filename }} ({{ prediction.timestamp.strftime('%m/%d/%Y') }})
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" name="message" rows="3" placeholder="Share your research insights..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">📤 Share Report</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if current_user.role == 'doctor' %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>👨‍⚕️ Medical Consultations</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/create-consultation">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Select Patient</label>
+                                <select class="form-select" name="patient_id" required>
+                                    <option value="">Choose a patient...</option>
+                                    {% for patient in patients %}
+                                    <option value="{{ patient.id }}">{{ patient.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Collaborate with Researcher</label>
+                                <select class="form-select" name="researcher_id">
+                                    <option value="">Optional...</option>
+                                    {% for researcher in researchers %}
+                                    <option value="{{ researcher.id }}">{{ researcher.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Medical Advice</label>
+                            <textarea class="form-control" name="medical_advice" rows="4" placeholder="Provide medical recommendations..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">💊 Create Consultation</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5>📋 Recent Collaborations</h5>
+                </div>
+                <div class="card-body">
+                    {% if shared_reports %}
+                        {% for report in shared_reports %}
+                        <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                            <div>
+                                <strong>Report #{{ report.prediction_id }}</strong>
+                                <br><small class="text-muted">{{ report.message[:50] }}...</small>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-{{ 'success' if report.status == 'viewed' else 'warning' }}">
+                                    {{ report.status|title }}
+                                </span>
+                                <br><small class="text-muted">{{ report.timestamp.strftime('%m/%d/%Y') }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No collaborations yet</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>👥 Available Professionals</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="text-primary">Doctors ({{ doctors|length }})</h6>
+                    {% for doctor in doctors[:3] %}
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-success me-2">👨‍⚕️</span>
+                        <small>Dr. {{ doctor.name }}</small>
+                    </div>
+                    {% endfor %}
+                    
+                    <h6 class="text-info mt-3">Researchers ({{ researchers|length }})</h6>
+                    {% for researcher in researchers[:3] %}
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-info me-2">🔬</span>
+                        <small>{{ researcher.name }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h6>📊 Collaboration Stats</h6>
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="text-primary">{{ shared_reports|length }}</h4>
+                    <small>Total Collaborations</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

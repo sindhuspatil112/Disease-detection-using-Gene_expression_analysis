@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🩺 Request Medical Consultation</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>📋 Consultation Request</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/create-patient-consultation">
+                        <div class="mb-3">
+                            <label class="form-label">Select Doctor</label>
+                            <select class="form-select" name="doctor_id" required>
+                                <option value="">Choose a doctor...</option>
+                                {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}">Dr. {{ doctor.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Select Your Risk Analysis Report</label>
+                            <select class="form-select" name="prediction_id" required>
+                                <option value="">Choose report...</option>
+                                {% for prediction in patient_predictions %}
+                                <option value="{{ prediction.id }}">
+                                    {{ prediction.filename }} - {{ prediction.timestamp.strftime('%B %d, %Y') }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Your Concerns & Questions</label>
+                            <textarea class="form-control" name="patient_message" rows="4" 
+                                placeholder="Describe your concerns about the risk analysis results, symptoms, or questions you have..." required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Urgency Level</label>
+                            <select class="form-select" name="urgency">
+                                <option value="routine">Routine - General consultation</option>
+                                <option value="urgent">Urgent - Need advice soon</option>
+                                <option value="emergency">Emergency - Immediate attention needed</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">📤 Send Consultation Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>💡 Consultation Tips</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled small">
+                        <li>✓ Be specific about your concerns</li>
+                        <li>✓ Mention any symptoms you're experiencing</li>
+                        <li>✓ Include family history if relevant</li>
+                        <li>✓ Ask about prevention strategies</li>
+                        <li>✓ Request follow-up recommendations</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h6>📊 Your Risk Summary</h6>
+                </div>
+                <div class="card-body">
+                    {% if patient_predictions %}
+                        {% set latest = patient_predictions[0] %}
+                        <p class="small"><strong>Latest Analysis:</strong></p>
+                        <p class="small">{{ latest.filename }}</p>
+                        <p class="small text-muted">{{ latest.timestamp.strftime('%B %d, %Y') }}</p>
+                    {% else %}
+                        <p class="small text-muted">No risk analysis available. Please upload your gene data first.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <a href="/dashboard" class="btn btn-secondary w-100">← Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

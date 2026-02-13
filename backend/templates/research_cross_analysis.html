@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Cross-Cancer Analysis</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Cross-Cancer Gene Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <form class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Cancer Type 1</label>
+                                <select class="form-select">
+                                    <option>Breast Cancer</option>
+                                    <option>Lung Cancer</option>
+                                    <option>Ovarian Cancer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Cancer Type 2</label>
+                                <select class="form-select">
+                                    <option>Lung Cancer</option>
+                                    <option>Breast Cancer</option>
+                                    <option>Ovarian Cancer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Analysis Type</label>
+                                <select class="form-select">
+                                    <option>Gene Overlap</option>
+                                    <option>Expression Correlation</option>
+                                    <option>Pathway Analysis</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Run Analysis</button>
+                    </form>
+                    
+                    <div class="results-section">
+                        <h6>Analysis Results: Breast vs Lung Cancer</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Common Genes</h6>
+                                        <div class="list-group list-group-flush">
+                                            <div class="list-group-item d-flex justify-content-between">
+                                                <span>TP53</span>
+                                                <span class="badge bg-primary">0.92</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between">
+                                                <span>MYC</span>
+                                                <span class="badge bg-primary">0.87</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between">
+                                                <span>PTEN</span>
+                                                <span class="badge bg-primary">0.83</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Unique Markers</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <strong>Breast Only:</strong>
+                                                <ul class="list-unstyled small">
+                                                    <li>• BRCA1</li>
+                                                    <li>• BRCA2</li>
+                                                    <li>• ESR1</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-6">
+                                                <strong>Lung Only:</strong>
+                                                <ul class="list-unstyled small">
+                                                    <li>• EGFR</li>
+                                                    <li>• KRAS</li>
+                                                    <li>• ALK</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5>Pathway Enrichment Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Pathway</th>
+                                    <th>Genes Involved</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cell Cycle Regulation</td>
+                                    <td>23</td>
+                                </tr>
+                                <tr>
+                                    <td>DNA Repair</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td>Apoptosis</td>
+                                    <td>15</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>Analysis Tools</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success">📊 Export Results</button>
+                        <button class="btn btn-info">📈 Visualize Network</button>
+                        <button class="btn btn-warning">🔄 Batch Analysis</button>
+                        <button class="btn btn-primary">📋 Generate Report</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>Analysis Summary</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-primary">47</h4>
+                            <small>Common Genes</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success">0.73</h4>
+                            <small>Correlation</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-warning">12</h4>
+                            <small>Pathways</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-info">156</h4>
+                            <small>Total Genes</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <a href="/dashboard" class="btn btn-secondary w-100">← Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

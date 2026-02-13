@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width:500px;">
+    <h3 class="mb-4 text-center">Register</h3>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/register">
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input class="form-control" type="text" name="name" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" type="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input class="form-control" type="password" name="password" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select class="form-select" name="role" required>
+                <option value="">Select your role</option>
+                <option value="user">Patient/User</option>
+                <option value="doctor">Doctor</option>
+                <option value="researcher">Researcher</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success w-100 mt-2">Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="/login">Login here</a></p>
+    </div>
+</div>
+
+{% endblock %}

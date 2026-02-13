@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GeneRisk AI - Advanced Cancer Risk Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            margin-bottom: 1rem;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .login-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="login-btn">
+            <a href="/login" class="btn btn-light btn-lg">🔐 Login</a>
+        </div>
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <div class="logo-container">
+                        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="GeneRisk AI Logo" class="logo-image">
+                        <h1 class="hero-title">🧬 GeneRisk AI</h1>
+                        <p class="hero-subtitle">Advanced Gene Expression Analysis for Cancer Risk Prediction</p>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <h2 class="mb-4">Discover Your Cancer Risk Profile</h2>
+                        <p class="lead">Harness the power of artificial intelligence and genomics to understand your personalized cancer risk. Our advanced machine learning models analyze gene expression patterns to provide accurate predictions for breast, lung, and ovarian cancers.</p>
+                    </div>
+                    
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-4">
+                            <div class="card feature-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="display-4 mb-3">🎗️</div>
+                                    <h5>Breast Cancer</h5>
+                                    <p>Advanced BRCA1/BRCA2 analysis with 94.2% accuracy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="display-4 mb-3">🫁</div>
+                                    <h5>Lung Cancer</h5>
+                                    <p>EGFR and KRAS mutation analysis with 91.7% accuracy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card h-100">
+                                <div class="card-body text-center">
+                                    <div class="display-4 mb-3">🩺</div>
+                                    <h5>Ovarian Cancer</h5>
+                                    <p>CA125 and HE4 biomarker analysis with 88.9% accuracy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card feature-card">
+                                <div class="card-body">
+                                    <h4 class="mb-3">🔬 How It Works</h4>
+                                    <div class="row text-start">
+                                        <div class="col-md-6">
+                                            <h6>📊 For Patients</h6>
+                                            <ul class="list-unstyled">
+                                                <li>• Upload gene expression data</li>
+                                                <li>• Get personalized risk reports</li>
+                                                <li>• Track health insights</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>👨‍⚕️ For Professionals</h6>
+                                            <ul class="list-unstyled">
+                                                <li>• Clinical decision support</li>
+                                                <li>• Research analytics tools</li>
+                                                <li>• Patient management system</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <a href="/register" class="btn btn-light btn-lg me-3">🚀 Get Started</a>
+                        <a href="/login" class="btn btn-outline-light btn-lg">🔐 Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">Admin Dashboard</h2>
+            
+            <div class="alert alert-danger">
+                <h5>🔐 Administrator Access</h5>
+                <p>Full system access - manage users, monitor system health, and oversee all operations.</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">👥 User Management</h5>
+                            <p class="card-text">Manage user accounts and permissions</p>
+                            <a href="/admin/users" class="btn btn-danger">Manage Users</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">📊 System Analytics</h5>
+                            <p class="card-text">View system-wide statistics and usage</p>
+                            <a href="/admin/analytics" class="btn btn-primary">View Analytics</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">🔧 System Settings</h5>
+                            <p class="card-text">Configure system parameters and models</p>
+                            <a href="/admin/settings" class="btn btn-warning">Settings</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">📋 Audit Logs</h5>
+                            <p class="card-text">Review system activity and user actions</p>
+                            <a href="/history" class="btn btn-info">View Logs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Admin Profile</h6>
+                    <p><strong>Name:</strong> {{ current_user.name }}</p>
+                    <p><strong>Role:</strong> Administrator</p>
+                    <p><strong>Email:</strong> {{ current_user.email }}</p>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6 class="card-title">System Status</h6>
+                    <div class="d-flex justify-content-between">
+                        <span>Database:</span>
+                        <span class="badge bg-success">Online</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Models:</span>
+                        <span class="badge bg-success">Active</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>API:</span>
+                        <span class="badge bg-success">Running</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6 class="card-title">Quick Stats</h6>
+                    <p><strong>Total Users:</strong> {{ total_users or "N/A" }}</p>
+                    <p><strong>Predictions Today:</strong> {{ total_predictions or "N/A" }}</p>
+                    <p><strong>System Uptime:</strong> 99.9%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

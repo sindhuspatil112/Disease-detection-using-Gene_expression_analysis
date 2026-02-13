@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Model Performance Analysis</h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Model Accuracy Comparison</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Cancer Type</th>
+                                    <th>Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Breast Balanced Model</td>
+                                    <td>Breast Cancer</td>
+                                    <td>94.2%</td>
+                                    <td>92.8%</td>
+                                    <td>95.1%</td>
+                                    <td>93.9%</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lung Balanced Model</td>
+                                    <td>Lung Cancer</td>
+                                    <td>91.7%</td>
+                                    <td>89.3%</td>
+                                    <td>93.2%</td>
+                                    <td>91.2%</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ovarian Balanced Model</td>
+                                    <td>Ovarian Cancer</td>
+                                    <td>88.9%</td>
+                                    <td>86.1%</td>
+                                    <td>91.4%</td>
+                                    <td>88.7%</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cross-Cancer Union Model</td>
+                                    <td>Multi-Cancer</td>
+                                    <td>85.3%</td>
+                                    <td>83.7%</td>
+                                    <td>87.2%</td>
+                                    <td>85.4%</td>
+                                    <td><span class="badge bg-warning">Testing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Model Training History</h5>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-success"></div>
+                            <div class="timeline-content">
+                                <h6>Breast Cancer Model v2.1</h6>
+                                <p class="text-muted small">Deployed - January 15, 2024</p>
+                                <p>Improved accuracy by 3.2% with enhanced feature selection</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-info"></div>
+                            <div class="timeline-content">
+                                <h6>Cross-Cancer Model Training</h6>
+                                <p class="text-muted small">In Progress - January 10, 2024</p>
+                                <p>Training unified model for multi-cancer prediction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>Model Actions</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">🔄 Retrain Models</button>
+                        <button class="btn btn-success">📊 Export Metrics</button>
+                        <button class="btn btn-info">🔍 Validate Models</button>
+                        <button class="btn btn-warning">⚙️ Hyperparameter Tuning</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h6>Performance Alerts</h6>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning alert-sm">
+                        <strong>Notice:</strong> Ovarian model accuracy dropped 2% this week
+                    </div>
+                    <div class="alert alert-success alert-sm">
+                        <strong>Success:</strong> Breast model performing above baseline
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <a href="/dashboard" class="btn btn-secondary w-100">← Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -35px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 17px;
+    width: 2px;
+    height: calc(100% + 5px);
+    background-color: #dee2e6;
+}
+
+.alert-sm {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+}
+</style>
+
+{% endblock %}

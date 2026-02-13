@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Biomarker Research Dashboard</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Top Biomarkers by Cancer Type</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="cancerTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="breast-tab" data-bs-toggle="tab" data-bs-target="#breast" type="button">Breast Cancer</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="lung-tab" data-bs-toggle="tab" data-bs-target="#lung" type="button">Lung Cancer</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="ovarian-tab" data-bs-toggle="tab" data-bs-target="#ovarian" type="button">Ovarian Cancer</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content mt-3" id="cancerTabsContent">
+                        <div class="tab-pane fade show active" id="breast" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Gene</th>
+                                            <th>Importance Score</th>
+                                            <th>Expression Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>BRCA1</td><td>0.95</td><td>High</td></tr>
+                                        <tr><td>BRCA2</td><td>0.92</td><td>High</td></tr>
+                                        <tr><td>TP53</td><td>0.88</td><td>Medium</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="lung" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Gene</th>
+                                            <th>Importance Score</th>
+                                            <th>Expression Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>EGFR</td><td>0.94</td><td>High</td></tr>
+                                        <tr><td>KRAS</td><td>0.89</td><td>Medium</td></tr>
+                                        <tr><td>ALK</td><td>0.85</td><td>Low</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ovarian" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Gene</th>
+                                            <th>Importance Score</th>
+                                            <th>Expression Level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>CA125</td><td>0.91</td><td>High</td></tr>
+                                        <tr><td>HE4</td><td>0.87</td><td>Medium</td></tr>
+                                        <tr><td>FOLR1</td><td>0.83</td><td>Medium</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6>Research Tools</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">🔬 Compare Biomarkers</button>
+                        <button class="btn btn-success">📊 Export Data</button>
+                        <button class="btn btn-info">📈 Visualize Trends</button>
+                        <a href="/dashboard" class="btn btn-secondary">← Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h6>Cross-Cancer Analysis</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small">Common biomarkers across cancer types:</p>
+                    <ul class="list-unstyled small">
+                        <li>• TP53 (Universal tumor suppressor)</li>
+                        <li>• MYC (Oncogene activation)</li>
+                        <li>• PTEN (Tumor suppressor)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

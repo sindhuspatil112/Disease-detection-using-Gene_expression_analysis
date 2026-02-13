@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Doctor Analytics Dashboard</h2>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Total Patients</h5>
+                    <h2 class="display-4">127</h2>
+                    <p class="text-muted">This month</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">High Risk Cases</h5>
+                    <h2 class="display-4">23</h2>
+                    <p class="text-muted">Requiring attention</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Predictions Made</h5>
+                    <h2 class="display-4">342</h2>
+                    <p class="text-muted">Total this month</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Risk Distribution by Cancer Type</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Recent High-Risk Patients</h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex justify-content-between">
+                            <span>Patient #045</span>
+                            <span class="badge bg-danger">High</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between">
+                            <span>Patient #032</span>
+                            <span class="badge bg-warning">Medium</span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between">
+                            <span>Patient #018</span>
+                            <span class="badge bg-danger">High</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Quick Actions</h6>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary">📊 Generate Report</button>
+                        <button class="btn btn-success">📧 Send Alerts</button>
+                        <a href="/dashboard" class="btn btn-secondary">← Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simple chart placeholder - in production, use Chart.js or similar
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('riskChart');
+    const ctx = canvas.getContext('2d');
+    
+    // Simple bar chart representation
+    ctx.fillStyle = '#dc3545';
+    ctx.fillRect(50, 150, 60, 30);
+    ctx.fillStyle = '#ffc107';
+    ctx.fillRect(150, 120, 60, 60);
+    ctx.fillStyle = '#28a745';
+    ctx.fillRect(250, 80, 60, 100);
+    
+    // Labels
+    ctx.fillStyle = '#000';
+    ctx.font = '12px Arial';
+    ctx.fillText('Breast', 60, 195);
+    ctx.fillText('Lung', 165, 195);
+    ctx.fillText('Ovarian', 255, 195);
+});
+</script>
+
+{% endblock %}
